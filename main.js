@@ -9,7 +9,7 @@ import {
   $score,
 } from "./const";
 
-//1. Inicializa el canvas
+// 1. Inicializa el canvas
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
 
