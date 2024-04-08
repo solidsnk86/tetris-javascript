@@ -54,12 +54,6 @@ footer {
   display: inline;
 }
 
-.arrow-up {
-  fill: black;
-  color: black;
-  background-color: black;
-}
-
 @media (width <= 762px) {
   .pad-buttons {
     display: block;
