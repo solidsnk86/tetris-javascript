@@ -40,7 +40,14 @@ section {
 }
 
 .pad-buttons button {
-  padding: 10px;
+  padding: 14px;
+  margin: 4px;
+  border-radius: 6px;
+  box-shadow: 3px 6px 9px rgba(0, 0, 0, 0.486);
+}
+
+.pad-buttons button:focus-visible {
+  box-shadow: none;
 }
 
 header {
@@ -54,6 +61,9 @@ footer {
 }
 
 @media (width <= 762px) {
+  section {
+    font-size: 36px;
+  }
   .pad-buttons {
     display: block;
   }
