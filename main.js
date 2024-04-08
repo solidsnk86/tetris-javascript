@@ -163,22 +163,23 @@ function rotatePieces() {
   }
 }
 
-document.addEventListener("keydown", (event) => {
-  event.key === EVENT_MOVEMENTS.LEFT
-    ? movePieceLeft()
-    : LEFT_BUTTON.addEventListener("click", movePieceLeft);
+document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("keydown", (event) => {
+    if (event.key === EVENT_MOVEMENTS.LEFT) {
+      movePieceLeft();
+    } else if (event.key === EVENT_MOVEMENTS.RIGHT) {
+      movePieceRight();
+    } else if (event.key === EVENT_MOVEMENTS.DOWN) {
+      movePieceDown();
+    } else if (event.key === EVENT_MOVEMENTS.UP) {
+      rotatePieces();
+    }
+  });
 
-  event.key === EVENT_MOVEMENTS.RIGHT
-    ? movePieceRight()
-    : RIGHT_BUTTON.addEventListener("click", movePieceRight);
-
-  event.key === EVENT_MOVEMENTS.DOWN
-    ? movePieceDown()
-    : DOWN_BUTTON.addEventListener("click", movePieceDown);
-
-  event.key === EVENT_MOVEMENTS.UP
-    ? rotatePieces()
-    : UP_BUTTON.addEventListener("click", rotatePieces);
+  LEFT_BUTTON.addEventListener("click", movePieceLeft);
+  RIGHT_BUTTON.addEventListener("click", movePieceRight);
+  DOWN_BUTTON.addEventListener("click", movePieceDown);
+  UP_BUTTON.addEventListener("click", rotatePieces);
 });
 
 function checkCollision() {
