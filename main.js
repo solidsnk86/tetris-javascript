@@ -134,59 +134,51 @@ function movePieceRight() {
   }
 }
 
+function movePieceDown() {
+  piece.position.y++;
+  if (checkCollision()) {
+    piece.position.y--;
+    solidifyPiece();
+    removeRows();
+  }
+}
+
+function rotatePieces() {
+  const rotated = [];
+
+  for (let i = 0; i < piece.shape[0].length; i++) {
+    const row = [];
+
+    for (let j = piece.shape.length - 1; j >= 0; j--) {
+      row.push(piece.shape[j][i]);
+    }
+
+    rotated.push(row);
+  }
+
+  const previousShape = piece.shape;
+  piece.shape = rotated;
+  if (checkCollision()) {
+    piece.shape = previousShape;
+  }
+}
+
 document.addEventListener("keydown", (event) => {
-  if (event.key === EVENT_MOVEMENTS.LEFT) {
-    movePieceLeft();
-  }
+  event.key === EVENT_MOVEMENTS.LEFT
+    ? movePieceLeft()
+    : LEFT_BUTTON.addEventListener("click", movePieceLeft);
 
-  LEFT_BUTTON.addEventListener("click", movePieceLeft);
+  event.key === EVENT_MOVEMENTS.RIGHT
+    ? movePieceRight()
+    : RIGHT_BUTTON.addEventListener("click", movePieceRight);
 
-  if (event.key === EVENT_MOVEMENTS.RIGHT) {
-    movePieceRight();
-  }
+  event.key === EVENT_MOVEMENTS.DOWN
+    ? movePieceDown()
+    : DOWN_BUTTON.addEventListener("click", movePieceDown);
 
-  RIGHT_BUTTON.addEventListener("click", movePieceRight);
-
-  function movePieceDown() {
-    piece.position.y++;
-    if (checkCollision()) {
-      piece.position.y--;
-      solidifyPiece();
-      removeRows();
-    }
-  }
-
-  if (event.key === EVENT_MOVEMENTS.DOWN) {
-    movePieceDown();
-  }
-
-  DOWN_BUTTON.addEventListener("click", movePieceDown);
-
-  function rotatePieces() {
-    const rotated = [];
-
-    for (let i = 0; i < piece.shape[0].length; i++) {
-      const row = [];
-
-      for (let j = piece.shape.length - 1; j >= 0; j--) {
-        row.push(piece.shape[j][i]);
-      }
-
-      rotated.push(row);
-    }
-
-    const previousShape = piece.shape;
-    piece.shape = rotated;
-    if (checkCollision()) {
-      piece.shape = previousShape;
-    }
-  }
-
-  if (event.key === EVENT_MOVEMENTS.UP) {
-    rotatePieces();
-  }
-
-  UP_BUTTON.addEventListener("click", rotatePieces);
+  event.key === EVENT_MOVEMENTS.UP
+    ? rotatePieces()
+    : UP_BUTTON.addEventListener("click", rotatePieces);
 });
 
 function checkCollision() {
