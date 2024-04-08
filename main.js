@@ -7,6 +7,10 @@ import {
   GAMEOVER_ALERT,
   $section,
   $score,
+  UP_BUTTON,
+  LEFT_BUTTON,
+  RIGHT_BUTTON,
+  DOWN_BUTTON,
 } from "./const";
 
 // 1. Inicializa el canvas
@@ -20,7 +24,7 @@ canvas.height = BLOCK_SIZE * BOARD_HEIGHT;
 
 context.scale(BLOCK_SIZE, BLOCK_SIZE);
 
-// .2 Board
+// .2 Board (Tablero)
 const board = createBoard(BOARD_WIDTH, BOARD_HEIGHT);
 
 function createBoard(width, height) {
@@ -29,7 +33,7 @@ function createBoard(width, height) {
     .map(() => Array(width).fill(0));
 }
 
-// 3. Player Piece
+// 3. Player Piece (Piezas del jugador)
 const piece = {
   position: { x: 0, y: 0 },
   shape: [
@@ -38,7 +42,7 @@ const piece = {
   ],
 };
 
-// 4. Ramdonm Pieces
+// 4. Ramdom Pieces (Piezas al azar) - Matrices
 const PIECES = [
   [
     [1, 1],
@@ -65,7 +69,7 @@ const PIECES = [
   ],
 ];
 
-// 5. Auto Drop
+// 5. Auto Drop (Caída automática)
 let dropCounter = 0;
 let lastTime = 0;
 
@@ -90,6 +94,7 @@ function update(time = 0) {
   window.requestAnimationFrame(update);
 }
 
+// Draw on Canvas (Dibujar las piezas en el Canvas)
 function draw() {
   context.fillStyle = "#000";
   context.fillRect(0, 0, canvas.width, canvas.height);
@@ -114,22 +119,35 @@ function draw() {
   $score.innerText = score;
 }
 
+// Keyboards functions (Teclas)
+function movePieceLeft() {
+  piece.position.x--;
+  if (checkCollision()) {
+    piece.position.x++;
+  }
+}
+
+function movePieceRight() {
+  piece.position.x++;
+  if (checkCollision()) {
+    piece.position.x--;
+  }
+}
+
 document.addEventListener("keydown", (event) => {
   if (event.key === EVENT_MOVEMENTS.LEFT) {
-    piece.position.x--;
-    if (checkCollision()) {
-      piece.position.x++;
-    }
+    movePieceLeft();
   }
+
+  LEFT_BUTTON.addEventListener("click", movePieceLeft);
 
   if (event.key === EVENT_MOVEMENTS.RIGHT) {
-    piece.position.x++;
-    if (checkCollision()) {
-      piece.position.x--;
-    }
+    movePieceRight();
   }
 
-  if (event.key === EVENT_MOVEMENTS.DOWN) {
+  RIGHT_BUTTON.addEventListener("click", movePieceRight);
+
+  function movePieceDown() {
     piece.position.y++;
     if (checkCollision()) {
       piece.position.y--;
@@ -138,7 +156,13 @@ document.addEventListener("keydown", (event) => {
     }
   }
 
-  if (event.key === EVENT_MOVEMENTS.UP) {
+  if (event.key === EVENT_MOVEMENTS.DOWN) {
+    movePieceDown();
+  }
+
+  DOWN_BUTTON.addEventListener("click", movePieceDown);
+
+  function rotatePieces() {
     const rotated = [];
 
     for (let i = 0; i < piece.shape[0].length; i++) {
@@ -157,6 +181,12 @@ document.addEventListener("keydown", (event) => {
       piece.shape = previousShape;
     }
   }
+
+  if (event.key === EVENT_MOVEMENTS.UP) {
+    rotatePieces();
+  }
+
+  UP_BUTTON.addEventListener("click", rotatePieces);
 });
 
 function checkCollision() {
@@ -169,6 +199,7 @@ function checkCollision() {
   });
 }
 
+// Solidify piece (Solidificar las piezas al colisionar)
 function solidifyPiece() {
   piece.shape.forEach((row, y) => {
     row.forEach((value, x) => {
@@ -178,18 +209,19 @@ function solidifyPiece() {
     });
   });
 
-  // Reset Position
+  // Reset Position (Resetear posición)
   piece.position.x = Math.floor(BOARD_WIDTH / 2 - 2);
   piece.position.y = 0;
-  // Get ramdom pieces
+  // Get ramdom pieces (Obtener piezas al azar)
   piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)];
-  // Gameover
+  // Gameover (Perdiste el juego)
   if (checkCollision()) {
     window.alert(GAMEOVER_ALERT);
     board.forEach((row) => row.fill(0));
   }
 }
 
+// Remover las filas
 function removeRows() {
   const rowsToRemove = [];
 
@@ -207,6 +239,7 @@ function removeRows() {
   });
 }
 
+// Play theme TETRIS song (Reproducir música tetris al comenzar)
 $section.addEventListener("click", () => {
   update();
 

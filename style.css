@@ -30,6 +30,32 @@ section {
   display: grid;
   font-size: 48px;
   place-content: center;
+  text-wrap: balance;
 }
 
+.pad-buttons {
+  display: none;
+  justify-content: center;
+  margin: 20px auto;
+}
 
+.pad-buttons button {
+  padding-block: 6px;
+  padding-inline: 6px;
+}
+
+header {
+  justify-content: center;
+  margin: 4px auto;
+  display: flex;
+}
+
+footer {
+  display: inline;
+}
+
+@media (max-width: 400px) {
+  .pad-buttons {
+    display: block;
+  }
+}
