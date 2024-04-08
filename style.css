@@ -54,7 +54,7 @@ footer {
   display: inline;
 }
 
-@media (max-width: 400px) {
+@media (width <= 762px) {
   .pad-buttons {
     display: block;
   }
