@@ -5,6 +5,7 @@ Este proyecto, creado con Vite, sirve como prueba técnica para implementar la l
 ### Proyecto realizado en una prueba técnica
 
 Este trabajo está basado en un tutorial de <a href="https://github.com/midudev">midudev</a>.
+Y le he ido añadiendo funciones y modificándolas.
 
 ### Empezar
 
