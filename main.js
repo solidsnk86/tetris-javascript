@@ -13,6 +13,8 @@ import {
   DOWN_BUTTON,
 } from "./const";
 
+const $body = document.body;
+
 // 1. Inicializa el canvas
 const canvas = document.querySelector("canvas");
 const context = canvas.getContext("2d");
@@ -210,19 +212,9 @@ function solidifyPiece() {
   piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)];
   // Gameover (Perdiste el juego)
   if (checkCollision()) {
-    gameOverCard(GAMEOVER_ALERT);
     board.forEach((row) => row.fill(0));
+    alert(GAMEOVER_ALERT(score));
   }
-}
-
-function gameOverCard(alert) {
-  const $body = document.body;
-  $body.innerHTML = `
-  <div class="gameover">
-    <h1>${alert}</h1>
-  </div>
-  `;
-  document.body.appendChild(div);
 }
 
 // Remover las filas
@@ -249,9 +241,9 @@ $section.addEventListener("click", () => {
   $section.remove();
 
   const playlist = [
+    { src: "/Willy Crook - Soul_Driver.mp3", volume: 0.6 },
     { src: "/willy crook & funky torinos - Play Your Game.mp3", volume: 0.8 },
     { src: "/Willy Crook - Evil ways.mp3", volume: 0.7 },
-    { src: "/Willy Crook - Soul_Driver.mp3", volume: 0.6 },
   ];
 
   let currentTrack = 0;

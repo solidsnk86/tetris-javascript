@@ -13,6 +13,7 @@ export const LEFT_BUTTON = document.getElementById("left");
 export const RIGHT_BUTTON = document.getElementById("right");
 export const DOWN_BUTTON = document.getElementById("down");
 
-export const GAMEOVER_ALERT = "¡Perdiste! Lo siento cabeza de 🍈...";
+export const GAMEOVER_ALERT = (score) =>
+  `Lo Siento...¡Perdiste! Haz obtenido ${score} puntos.`;
 export const $section = document.querySelector("section");
 export const $score = document.querySelector("span");
