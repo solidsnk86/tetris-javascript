@@ -280,9 +280,6 @@ $section.addEventListener("click", () => {
       });
     }
   }
-  if (checkCollision()) {
-    audio.pause();
-  }
 
   playNextTrack();
 });
