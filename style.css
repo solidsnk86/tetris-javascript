@@ -22,7 +22,10 @@ body {
 
 section {
   position: absolute;
-  background: black;
+  background-image: url("./public/gpt4o_nux_bg.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100vw;
   height: 100vh;
   inset: 0;
@@ -67,4 +70,34 @@ footer {
   .pad-buttons {
     display: block;
   }
+}
+
+.gameover {
+  position: absolute;
+  border: 1px solid #444;
+  padding: 20px;
+  background-color: #242424;
+  top: 25%;
+  left: 33%;
+}
+
+.reproduction-buttons {
+  display: flex;
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.reproduction-buttons > button:hover {
+  border-radius: 4px;
+}
+
+#pause-button {
+  margin: 10px auto;
+  padding-inline: 8px;
+  cursor: pointer;
+}
+#play-button {
+  margin: 10px auto;
+  padding-inline: 14px;
+  cursor: pointer;
 }

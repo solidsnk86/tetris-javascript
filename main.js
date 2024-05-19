@@ -163,6 +163,7 @@ function rotatePieces() {
   }
 }
 
+// Se agregan botones para dispositivos móviles
 document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", (event) => {
     if (event.key === EVENT_MOVEMENTS.LEFT) {
@@ -209,9 +210,19 @@ function solidifyPiece() {
   piece.shape = PIECES[Math.floor(Math.random() * PIECES.length)];
   // Gameover (Perdiste el juego)
   if (checkCollision()) {
-    window.alert(GAMEOVER_ALERT);
+    gameOverCard(GAMEOVER_ALERT);
     board.forEach((row) => row.fill(0));
   }
+}
+
+function gameOverCard(alert) {
+  const $body = document.body;
+  $body.innerHTML = `
+  <div class="gameover">
+    <h1>${alert}</h1>
+  </div>
+  `;
+  document.body.appendChild(div);
 }
 
 // Remover las filas
@@ -235,7 +246,6 @@ function removeRows() {
 // Play music list (Reproducir música tetris al comenzar)
 $section.addEventListener("click", () => {
   update();
-
   $section.remove();
 
   const playlist = [
@@ -243,21 +253,36 @@ $section.addEventListener("click", () => {
     { src: "/Willy Crook - Evil ways.mp3", volume: 0.7 },
     { src: "/Willy Crook - Soul_Driver.mp3", volume: 0.6 },
   ];
-  
+
   let currentTrack = 0;
-  
+
   function playNextTrack() {
     const track = playlist[currentTrack];
     const audio = new window.Audio(track.src);
     audio.volume = track.volume;
     audio.play();
-    
+
     audio.onended = () => {
       currentTrack = (currentTrack + 1) % playlist.length; // Pasar al siguiente tema
       playNextTrack();
     };
+
+    const pauseButton = document.querySelector("#pause-button");
+    if (pauseButton) {
+      pauseButton.addEventListener("click", () => {
+        audio.pause();
+      });
+    }
+    const playButton = document.querySelector("#play-button");
+    if (playButton) {
+      playButton.addEventListener("click", () => {
+        audio.play();
+      });
+    }
   }
-  
+  if (checkCollision()) {
+    audio.pause();
+  }
+
   playNextTrack();
-  
 });
