@@ -26,7 +26,7 @@ Para comenzar con este proyecto, sigue estos pasos:
 2. Navega hasta el directorio del proyecto:
 
 ```bash
-   cd neo-tetris
+   cd tetris-javascript
 ```
 
 3. Instala las dependencias:
