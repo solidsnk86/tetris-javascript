@@ -240,4 +240,7 @@ $section.addEventListener("click", () => {
   const audio = new window.Audio("/Willy Crook - Evil ways.mp3");
   audio.volume = 0.5;
   audio.play();
+  audio.onended = () => {
+    Audio("/Willy Crook - Evil ways.mp3")
+  }
 });
