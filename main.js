@@ -232,15 +232,32 @@ function removeRows() {
   });
 }
 
-// Play theme TETRIS song (Reproducir música tetris al comenzar)
+// Play music list (Reproducir música tetris al comenzar)
 $section.addEventListener("click", () => {
   update();
 
   $section.remove();
-  const audio = new window.Audio("/Willy Crook - Evil ways.mp3");
-  audio.volume = 0.5;
-  audio.play();
-  audio.onended = () => {
-    Audio("/Willy Crook - Evil ways.mp3")
+
+  const playlist = [
+    { src: "/willy crook & funky torinos - Play Your Game.mp3", volume: 0.8 },
+    { src: "/Willy Crook - Evil ways.mp3", volume: 0.7 },
+    { src: "/Willy Crook - Soul_Driver.mp3", volume: 0.6 },
+  ];
+  
+  let currentTrack = 0;
+  
+  function playNextTrack() {
+    const track = playlist[currentTrack];
+    const audio = new window.Audio(track.src);
+    audio.volume = track.volume;
+    audio.play();
+    
+    audio.onended = () => {
+      currentTrack = (currentTrack + 1) % playlist.length; // Pasar al siguiente tema
+      playNextTrack();
+    };
   }
+  
+  playNextTrack();
+  
 });
