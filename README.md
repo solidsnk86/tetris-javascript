@@ -1,6 +1,5 @@
-### Juego de Tetris con JavaScript Vanilla y Canvas
-
 <div align="center">
+   ### Juego de Tetris con JavaScript Vanilla y Canvas
 <img src="/public/tetris-picture.jpg" width="200" height="180"/>
 </div>
 
