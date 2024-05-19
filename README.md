@@ -1,7 +1,7 @@
 ### Juego de Tetris con JavaScript Vanilla y Canvas
 
 <div align="center">
-<img src="public/tetris-picture.png" width="200" height="180"/>
+<img src="/public/tetris-picture.jpg" width="200" height="180"/>
 </div>
 
 Este proyecto, creado con Vite, sirve como prueba técnica para implementar la lógica del clásico juego Tetris utilizando JavaScript. La interfaz del juego se renderiza utilizando el elemento HTML `<canvas>`.
