@@ -84,7 +84,6 @@ footer {
 .reproduction-buttons {
   display: flex;
   border: 1px solid #444;
-  border-radius: 4px;
 }
 
 .reproduction-buttons > button:hover {
@@ -93,11 +92,21 @@ footer {
 
 #pause-button {
   margin: 10px auto;
-  padding-inline: 8px;
+  padding-inline: 4px;
   cursor: pointer;
 }
 #play-button {
   margin: 10px auto;
-  padding-inline: 14px;
+  padding-inline: 6px;
+  cursor: pointer;
+}
+#backward-button {
+  margin: 10px auto;
+  padding-inline: 6px;
+  cursor: pointer;
+}
+#forward-button {
+  margin: 10px auto;
+  padding-inline: 6px;
   cursor: pointer;
 }

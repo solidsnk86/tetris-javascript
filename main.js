@@ -11,9 +11,11 @@ import {
   LEFT_BUTTON,
   RIGHT_BUTTON,
   DOWN_BUTTON,
+  playButton,
+  pauseButton,
+  forwardButton,
+  backwardButton,
 } from "./const";
-
-const $body = document.body;
 
 // 1. Inicializa el canvas
 const canvas = document.querySelector("canvas");
@@ -259,16 +261,26 @@ $section.addEventListener("click", () => {
       playNextTrack();
     };
 
-    const pauseButton = document.querySelector("#pause-button");
     if (pauseButton) {
       pauseButton.addEventListener("click", () => {
         audio.pause();
       });
     }
-    const playButton = document.querySelector("#play-button");
     if (playButton) {
       playButton.addEventListener("click", () => {
         audio.play();
+      });
+    }
+    if (forwardButton) {
+      forwardButton.addEventListener("click", () => {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        audio.pause();
+        playNextTrack();
+      });
+    }
+    if (backwardButton) {
+      backwardButton.addEventListener("click", () => {
+        audio.currentTime--;
       });
     }
   }
