@@ -86,27 +86,47 @@ footer {
   border: 1px solid #444;
 }
 
-.reproduction-buttons > button:hover {
+.reproduction-buttons > button {
   border-radius: 4px;
+  background-color: #242424;
+  border: none;
+}
+
+.reproduction-buttons > button:hover {
+  opacity: 0.6;
 }
 
 #pause-button {
   margin: 10px auto;
-  padding-inline: 4px;
   cursor: pointer;
 }
 #play-button {
   margin: 10px auto;
-  padding-inline: 6px;
   cursor: pointer;
 }
 #backward-button {
   margin: 10px auto;
-  padding-inline: 6px;
   cursor: pointer;
 }
 #forward-button {
   margin: 10px auto;
-  padding-inline: 6px;
   cursor: pointer;
+}
+
+.play-svg,
+.pause-svg,
+.backward-svg,
+.forward-svg {
+  width: 24px;
+  height: 24px;
+  stroke: #fff;
+  stroke-width: 20px;
+  fill: none;
+}
+
+.play-svg:hover,
+.pause-svg:hover,
+.backward-svg:hover,
+.forward-svg:hover {
+  fill: #fff;
 }

@@ -243,16 +243,17 @@ $section.addEventListener("click", () => {
   $section.remove();
 
   const playlist = [
-    { src: "/Willy Crook - Soul_Driver.mp3", volume: 0.6 },
-    { src: "/willy crook & funky torinos - Play Your Game.mp3", volume: 0.8 },
-    { src: "/Willy Crook - Evil ways.mp3", volume: 0.7 },
+    { src: "/Willy Crook - Soul_Driver.mp3", volume: 0.5 },
+    { src: "/willy crook & funky torinos - Play Your Game.mp3", volume: 0.5 },
+    { src: "/Willy Crook - Evil ways.mp3", volume: 0.5 },
   ];
 
   let currentTrack = 0;
+  let audio = new Audio();
 
   function playNextTrack() {
     const track = playlist[currentTrack];
-    const audio = new window.Audio(track.src);
+    audio.src = track.src;
     audio.volume = track.volume;
     audio.play();
 
@@ -260,30 +261,45 @@ $section.addEventListener("click", () => {
       currentTrack = (currentTrack + 1) % playlist.length; // Pasar al siguiente tema
       playNextTrack();
     };
-
-    if (pauseButton) {
-      pauseButton.addEventListener("click", () => {
-        audio.pause();
-      });
-    }
-    if (playButton) {
-      playButton.addEventListener("click", () => {
-        audio.play();
-      });
-    }
-    if (forwardButton) {
-      forwardButton.addEventListener("click", () => {
-        currentTrack = (currentTrack + 1) % playlist.length;
-        audio.pause();
-        playNextTrack();
-      });
-    }
-    if (backwardButton) {
-      backwardButton.addEventListener("click", () => {
-        audio.currentTime--;
-      });
-    }
   }
 
+  function playPreviuosTrack() {
+    const track = playlist[currentTrack];
+    audio.src = track.src;
+    audio.volume = track.volume;
+    audio.play();
+
+    audio.onplaying = () => {
+      currentTrack = (currentTrack - 1) % playlist.length;
+      playPreviuosTrack();
+    };
+  }
+
+  if (pauseButton) {
+    pauseButton.addEventListener("click", () => {
+      audio.pause();
+    });
+  }
+  if (playButton) {
+    playButton.addEventListener("click", () => {
+      audio.play();
+    });
+  }
+  if (forwardButton) {
+    forwardButton.addEventListener("click", () => {
+      audio.pause(); // Pausar el audio actual
+      audio.currentTime = 0; // Reiniciar el tiempo de reproducción
+      currentTrack = (currentTrack + 1) % playlist.length;
+      playNextTrack();
+    });
+  }
+  if (backwardButton) {
+    backwardButton.addEventListener("click", () => {
+      playPreviuosTrack();
+      playNextTrack();
+    });
+  }
+
+  // Comienza la reproducción al cargar la página
   playNextTrack();
 });
